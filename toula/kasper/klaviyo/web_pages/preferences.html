@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="https://d3k81ch9hvuctc.cloudfront.net/company/XZCksH/images/4bc6522c-1c57-4b43-b8fa-9458c2a72dc9.png" />
+
+  <!-- JQUERY -->
+  <script type="text/javascript" src="./lib/jquery-3.3.1.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <style type="text/css">
+    /* Space out content a bit */
+    body {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-family:'Avenir Next', sans-serif;
+    }
+
+    form {
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      color: #504F56 !important;
+    }
+
+    /* Custom page header */
+    .header {
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 10px;
+    }
+
+    .border {
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .header h1 {
+      margin: 10px 0;
+    }
+
+    .update-button {
+      background-color: #000;
+      color: #fff;
+      font-size: 14px;
+      padding: 0;
+      text-transform: uppercase;
+      display: inline-block;
+      width: 200px;
+      margin: 5px 0 0 1%;
+      height: 45px;
+      border: 1px solid #000;
+      text-align: center;
+      line-height: 45px;
+      vertical-align: middle;
+    }
+
+    .update-button:hover {
+      background:#fff !important;
+      color: #000 !important;
+    }
+
+    .required-fields {
+      text-align: right;
+    }
+
+    .required-fields span {
+      color: #a94442;
+      font-weight: bold;
+    }
+
+    .list-group-item label {
+      font-weight: normal;
+      margin-top: 17px;
+    }
+
+    .list-group-item label input[type="checkbox"] {
+      margin-right: 4px;
+    }
+
+    .form-group span.required {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 20px;
+      color: #a94442;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    label.error {
+      color: #a94442;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .form-actions {
+      margin: 25px 0;
+    }
+
+    .form-control+.form-control {
+      margin-top: 6px;
+    }
+
+    .panel-group .panel-title .closed-icon,
+    .panel-group .panel-title .open-icon {
+      margin-right: 0.5em;
+      top: 2px;
+    }
+
+    .panel-group .panel-title a:hover,
+    .panel-group .panel-title a:active {
+      text-decoration: none;
+    }
+
+    .panel-group .panel-title a:hover .text,
+    .panel-group .panel-title a:active .text {
+      text-decoration: underline;
+    }
+
+    .panel-group .panel-title .closed-icon {
+      display: none;
+    }
+
+    .panel-group.closed .panel-title .open-icon {
+      display: none;
+    }
+
+    .panel-group.closed .panel-title .closed-icon {
+      display: inline;
+    }
+
+    /* Custom page footer */
+    .footer {
+      padding-top: 18px;
+      border-top: 1px solid #e5e5e5;
+    }
+    #interests{
+      margin-bottom:20px;
+      margin-top:5px;
+    }
+
+    /* Customize container */
+    @media (min-width: 768px) {
+      .container {
+        max-width: 730px;
+      }
+    }
+  </style>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+ <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+ <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+ <![endif]-->
+</head>
+
+<body>
+
+  <div align="center" style="padding-bottom:40px;padding-top:20px;">
+    <img src="https://d3k81ch9hvuctc.cloudfront.net/company/XZCksH/images/ba6dda7b-b588-450c-b24a-06aec2f0c5e5.png"
+      width="250px">
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h3>Email Preferences</h3>
+    </div>
+
+    <form action="" id="preferences_form" method="POST" role="form" class="form-horizontal">
+
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+        {{ error }}{% if not forloop.last %}<br />{% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <input type="hidden" name="$fields" value="EmailInterests,EmailFrequency" />
+      <input type="hidden" name="$list_fields" value="EmailInterests" />
+      <!-- <input type="hidden" name="$unsubscribed_url" value="/p/preferences_updated" /> -->
+      <!-- <input type="hidden" name="$updated_profile_url" value="/p/preferences_updated" /> -->
+
+      <!--<p class="required-fields">
+ <span>*</span> Required Information
+ </p>-->
+
+      <div class="form-group{% if form.errors|lookup:'$email' %} has-error{% endif %}">
+        <label for="email" class="col-sm-3 control-label">Email Address<span class="required">*</span></label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" name="$email" value="{% if request.POST|lookup:'$email' %}{{ request.POST|lookup:'$email' }}{% else %}{{ person.email|default:'' }}{% endif %}" />
+          {% if form.errors|lookup:'$email' %}
+          <p class="help-block">{% for error in form.errors|lookup:'$email' %}{{ error }}{% endfor %}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="first_name" class="col-sm-3 control-label">First Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="first_name" name="$first_name" value="{% if request.POST|lookup:'$email' %}{{ request.POST|lookup:'$first_name' }}{% else %}{{ person.first_name|default:'' }}{% endif %}" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="last_name" class="col-sm-3 control-label">Last Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="last_name" name="$last_name" value="{% if request.POST|lookup:'$email' %}{{ request.POST|lookup:'$last_name' }}{% else %}{{ person.last_name|default:'' }}{% endif %}" />
+        </div>
+      </div>
+
+      <!-- CHECKBOXES/INTERESTS -->
+      <div class="form-group" id = "interests">
+        <label for="interests" class="col-sm-3 control-label">What type of emails would you like to receive?</label>
+        <div class="col-sm-9">
+          <div class="checkbox">
+            <label class="label2">
+              <input type="checkbox" name="EmailInterests" value="ProductContent" {% if 'ProductContent' in person.EmailInterests or 'ProductContent' in request.POST.EmailInterests %}checked="checked" {% elif not person.EmailInterests and not
+                request.POST.EmailInterests %}checked="checked" {% endif %} />
+              New Arrivals & Product Updates
+            </label>
+          </div>
+          <div class="checkbox">
+            <label class="label2">
+              <input type="checkbox" name="EmailInterests" value="PromotionalContent" {% if 'PromotionalContent' in person.EmailInterests or 'PromotionalContent' in request.POST.EmailInterests %}checked="checked" {% elif not person.EmailInterests
+                and not request.POST.EmailInterests %}checked="checked" {% endif %} />
+              Sales & Promotions
+            </label>
+          </div>
+
+        </div>
+      </div>
+      <!-- END CHECKBOXES/INTERESTS -->
+
+      <!-- RADIO BUTTONS/EMAIL FREQUENCY -->
+       <div class="form-group">
+       <label for="interests" class="label2 col-sm-3 control-label">How often would you like to hear from us?</label>
+       <div class="col-sm-9">
+       <div class="radio">
+       <label class = "label2">
+       <!-- Default value. -->
+       <input type="radio" name="EmailFrequency" id="email_frequency_0" value="All" {% if person.EmailFrequency == 'All' or request.POST.EmailFrequency == 'All' %}checked="checked"{% elif not person.EmailFrequency and not request.POST.EmailFrequency %}checked="checked"{% endif %} />
+       Send me everything
+       </label>
+       </div>
+       <div class="radio">
+       <label class = "label2">
+       <input type="radio" name="EmailFrequency" id="email_frequency_1" value="Weekly" {% if person.EmailFrequency == 'Weekly' or request.POST.EmailFrequency == 'Weekly' %}checked="checked"{% endif %} />
+       Once per week
+       </label>
+       </div>
+
+         <div class="radio">
+       <label class = "label2">
+       <input type="radio" name="EmailFrequency" id="email_frequency_3" value="Month" {% if person.EmailFrequency == 'Month' or request.POST.EmailFrequency == 'Month' %}checked="checked"{% endif %} />
+       Once per month
+       </label>
+       </div>
+       </div>
+       </div>
+       <!-- END FREQUENCY -->
+
+
+      <div class="clearfix form-actions">
+        <div class="pull-right">
+          <button type="submit" class="update-button">Update Preferences</button>
+        </div>
+      </div>
+    </form>
+    <!-- CURRENT YEAR JS -->
+    <script type="text/javascript">
+      window.onload = function() {
+        var d = new Date();
+        var n = d.getFullYear();
+        $('#year').text(n);
+      }
+    </script>
+    <!-- END CURRENT YEAR JS -->
+    <footer class="footer">
+      <p>
+        &copy; <span id="year"></span> Kasper &mdash; <a href="https://www.kasper.com/pages/privacy-policy" target="_blank">Privacy Policy</a>
+      </p>
+    </footer>
+
+  </div> <!-- /container -->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+
+  <script>
+    $(function() {
+      $('#preferences_form').validate({
+        rules: {
+          $email: {
+            required: true
+          }
+        },
+        messages: {
+          $email: 'Please enter your email address.',
+          $first_name: 'Please enter your first name.',
+          $last_name: 'Please enter your last name.'
+        }
+      });
+      // Toggle validation based on selection.
+      $('input[name="$unsubscribe"]').on('change', function() {
+        $('form .form-actions button[type="submit"]').toggleClass('cancel', $(this).is(':checked'));
+      });
+    });
+  </script>
+
+</body>
+
+</html>

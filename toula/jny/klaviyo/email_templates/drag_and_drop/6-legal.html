@@ -1,0 +1,8 @@
+<p style="font-size:14px;">
+  <font color="#8c8c8c" style="color:#8c8c8c;">
+    This email advertisement was sent to
+    <span style="color:#8c8c8c;text-decoration:underline;">{{ email }}</span> {% if person|lookup:'$consent_timestamp' %} because on {{ person|lookup:'$consent_timestamp'|slice:':10'|datetime_from_string|date:'m/d/Y' }},
+    {% else %} because {% endif %} {{ full_name|default:'the specified email was' }} {% if person|lookup:'First Page' %} signed up for our mailing list at {{ person|lookup:'First Page' }}. {% else %} signed up for our
+    mailing list. {% endif %}
+  </font>
+</p>

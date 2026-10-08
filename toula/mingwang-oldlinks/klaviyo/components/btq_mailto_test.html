@@ -1,0 +1,28 @@
+
+<!-- CTA text for 'send email' link/button -->
+{% with "" as mailto_cta %}
+<!-- Email Primary Recipient - for multiple emails, separate with comma -->
+{% with "" as compose_to_email %}
+<!-- CC for multiple emails, separate with comma -->
+{% with "" as cc %}
+<!-- BCC for multiple emails, separate with comma -->
+{% with "" as bcc %}
+<!-- Subject Line -->
+{% with "" as compose_subject %}
+<!-- Email Body - %0D%0A for line break-->
+{% with "" as compose_body %}
+
+<!-- email link -->
+<a href="mailto:{{ compose_to_email }}?subject={{ compose_subject }}{% if bcc %}&bcc={{ bcc }}{% endif %}{% if cc %}&cc={{ cc }}{% endif %}{% if compose_body %}&body={{ compose_body }}{% endif %}">{{ mailto_cta }}</a>
+
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+
+<br><br><br><br>
+<p> output example </p>
+<a href="mailto:test@example.com?cc=email1@test.com, email2@test.com&subject=I'd like to place my Fall order&body=%0D%0A%0D%0ACompany Name:%0D%0A%0D%0AFirst and Last Name:%0D%0A%0D%0APhone Number:%0D%0A%0D%0AOrder Details:">Click to Test</a>

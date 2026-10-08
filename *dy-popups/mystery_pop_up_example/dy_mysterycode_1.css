@@ -1,0 +1,262 @@
+#mystery-popup {
+  width: 700px;
+  height: 550px;
+  background-color: white;
+}
+
+#spacing-1 {
+  height: 5%;
+}
+
+#mp-header {
+  width: 96%;
+  height: 35%;
+  margin: auto;
+  text-align: center;
+}
+
+.main-header {
+  vertical-align: middle;
+  font-size: 42px;
+  font-family: "Playfair Display" !important;
+  line-height: 120% !important;
+  font-weight: 700;
+  color: #000000;
+  text-transform: none;
+}
+
+.subtext-1 {
+  font-family: "Arimo", sans-serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  padding: 25px 30px 20px 30px;
+  line-height: 24px;
+  vertical-align: middle;
+  color: #000000;
+}
+
+#mod2Header {
+  font-size: 40px;
+  padding-bottom: 20px;
+  color: #000000;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 1.7px;
+  text-align: center;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+#disclaim-mod1 {
+  font-family: "Arimo", sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  vertical-align: top;
+}
+
+#mp-body {
+  width: 96%;
+  height: 35%;
+  margin: auto;
+  text-align: center;
+  color: #000000;
+}
+
+.image-option {
+  display: inline !important;
+}
+
+#option-1 {
+}
+
+#option-2 {
+}
+
+#option-3 {
+}
+
+.pop-img {
+  width: 25%;
+  margin: 2%;
+  display: inline;
+}
+
+img {
+}
+
+#spacing-2 {
+  height: 5%;
+}
+
+#mp-cta {
+  width: 96%;
+  height: 20%;
+  margin: auto;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.button {
+  background-color: black;
+  color: white;
+  border: 2px black solid;
+  font-family: "Arimo", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 100%;
+  height: 50px;
+  width: 42%;
+}
+
+#mp-disclaimer {
+  width: 85%;
+  height: 0%;
+  margin: auto;
+  text-align: center;
+  font-family: sans-serif, arial;
+  line-height: 100%;
+}
+
+#mp-cta2 {
+  background-color: black;
+  color: white;
+  border: 2px black solid;
+  font-family: "Arimo", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 100%;
+  height: 50px;
+  width: 42%;
+  border-radius: 0;
+}
+
+#mod2Body {
+  font-size: 26px;
+  font-family:
+    Helvetica Neue,
+    Arial;
+  text-align: center;
+  letter-spacing: 1.5px;
+  line-height: 130%;
+  color: #000000;
+}
+
+#disclaim-mod2 {
+  font-size: 12px;
+}
+
+@media only screen and (max-width: 700px) {
+  #mystery-popup {
+    width: 96vw !important;
+    height: auto !important;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  #mod2Header {
+    font-size: 35px;
+  }
+
+  #mod2Body {
+    font-size: 20px !important;
+    padding-top: 30px;
+  }
+
+  #mod2Body > span {
+    padding-bottom: 15px !important;
+  }
+
+  .button {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    line-height: 100%;
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #mystery-popup {
+    width: 98vw !important;
+  }
+
+  #spacing-1 {
+  }
+
+  #mp-header {
+    width: 98%;
+    margin: auto;
+    text-align: center;
+    font-family: "Playfair Display" !important;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .subtext-1 {
+    font-family: "Arimo", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    padding: 30px 30px 20px 30px;
+    line-height: 130%;
+    vertical-align: middle;
+    text-transform: none;
+    font-weight: normal;
+  }
+
+  .main-header {
+    font-size: 35px;
+    line-height: 100%;
+    color: #000000;
+  }
+
+  #mod2Header {
+    font-size: 35px !important;
+    line-height: 100%;
+  }
+
+  #mp-body {
+    padding-bottom: 20px;
+    color: #000000;
+  }
+
+  #mod2Body {
+    font-size: 16px !important;
+    line-height: 130%;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    color: #000000;
+  }
+
+  #mod2Body > span {
+    font-size: 18px !important;
+    margin: 0px;
+  }
+
+  #spacing-2 {
+    height: 5% !important;
+  }
+
+  #mp-cta1 {
+    width: 90% !important;
+    font-size: 12px !important;
+  }
+
+  #mp-cta2 {
+    width: 80%;
+  }
+
+  .button {
+    margin: 0px 0px 10px 0px;
+    line-height: 100%;
+    height: 50px;
+    width: 200px;
+  }
+
+  #disclaim-mod2 {
+    margin-top: 20px;
+    font-size: 10px;
+  }
+}

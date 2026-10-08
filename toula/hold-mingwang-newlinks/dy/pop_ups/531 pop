@@ -1,0 +1,66 @@
+window.onload = function() {
+
+
+  var option1 = $('#image-option1');
+  var option2 = $('#image-option2');
+  var option3 = $('#image-option3');
+  var submitMysteryOption = $('#mp-cta1');
+  var space1 = $ ('#spacing-1');
+  var prizeHeader = $('#mp-header');
+  var prizeBody = $('#mp-body');
+  var prizeDisclaimer = $('#mp-disclaimer');
+  var space2 = $ ('#spacing-2');
+  var modalCTA = $ ('#mp-cta');
+  var continueShopping = $('#mp-cta2');
+  var selectionMade = false;
+
+
+  // SELECTION FUNCTIONS
+    option1.on('click', function(e){
+      e.preventDefault();
+      option1.css({'border-left': '2px solid ${selected-color}', 'border-right': '2px solid ${selected-color}', 'border-top': '1px solid ${selected-color}', 'border-bottom': '1px solid ${selected-color}'});
+      option2.css('border', '0px');
+      option3.css('border', '0px');
+      selectionMade = true;
+    });
+
+    option2.on('click', function(e){
+      e.preventDefault();
+      option2.css({'border-left': '2px solid ${selected-color}', 'border-right': '2px solid ${selected-color}', 'border-top': '1px solid ${selected-color}', 'border-bottom': '1px solid ${selected-color}'});
+      option3.css('border', '0px');
+      option1.css('border', '0px');
+      selectionMade = true;
+     });
+
+    option3.on('click', function(e){
+      e.preventDefault();
+      option3.css({'border-left': '2px solid ${selected-color}', 'border-right': '2px solid ${selected-color}', 'border-top': '1px solid ${selected-color}', 'border-bottom': '1px solid ${selected-color}'});
+      option2.css('border', '0px');
+      option1.css('border', '0px');
+      selectionMade = true;
+    });
+
+    submitMysteryOption.on('click', function(e){
+    	if (selectionMade === true){
+        prizeHeader.html("<div id='mod2Header' style = 'color: #000000;font-family:Gotham, serif;letter-spacing:1.7px;text-align:center;line-height:100%;'>${modal 2 header}<\/div>");
+        prizeBody.html("<div id='mod2Body' align = 'center' style = 'font-family:Helvetica Neue, Arial;text-align:center;letter-spacing:1.5px;line-height:130%;'>Use code <span style = 'font-weight:bold;font-size:23px;letter-spacing:2px;font-family:Helvetica Neue, Arial;'>${promo code}<\/span> at checkout.  If you would like more time to shop, please write the code down for reference later. Your offer is valid through ${ valid until date }. <\/p><p  style = 'text-align:center;padding-right:60px;padding-left:60px;font-style:italic;font-size:18px;font-family:Arimo;'> <\/div>");
+        modalCTA.html("<a class='button' href='https://www.mingwang.com/discount/${promo code}?redirect=${ redirect-to }' id='mp-cta2'>${button-2-cta}</a>");
+        prizeDisclaimer.html("<div id='disclaim-mod2' style = 'color:#8c8c8c;text-align:center;'>${disclaimer text}<\/div>");
+        prizeDisclaimer.css("height", "10%");
+        prizeHeader.css("height", "20%");
+        prizeHeader.css("width", "85%");
+        prizeBody.css("height", "35%");
+        prizeBody.css("width", "80%");
+        modalCTA.css("height", "20%");
+        space2.css("height", "0%");
+
+        return true;
+        }
+        else{
+        	alert("Please select one of the three images before submitting your answer.");
+        	return false;
+        }
+    });
+
+
+};

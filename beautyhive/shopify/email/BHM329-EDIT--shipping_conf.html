@@ -1,0 +1,339 @@
+{% capture covid_msg %}Due to the impact of COVID-19, some carriers are experiencing delays. We promise to deliver your order as quickly as possible. Please <a href="https://www.beautyhive.com/pages/contact-us">contact us</a> if you have any questions or concerns.{% endcapture  %}
+{% if fulfillment.item_count == item_count %}
+  {% capture email_title %}Your order has shipped!{% endcapture %}
+  {% capture email_body %}Thank you for ordering from BeautyHive. Your items will be arriving soon!{% endcapture %}
+{% elsif fulfillment.item_count > 1 %}
+  {% if fulfillment_status == 'fulfilled' %}
+    {% capture email_title %}Your order has shipped!{% endcapture %}
+    {% capture email_body %}Thank you for ordering from BeautyHive. Your items will be arriving soon!{% endcapture %}
+  {% else %}
+    {% capture email_title %}Your order has shipped!{% endcapture %}
+    {% capture email_body %}Thank you for ordering from BeautyHive. Your items will be arriving soon!{% endcapture %}
+  {% endif %}
+{% else %}
+  {% if fulfillment_status == 'fulfilled' %}
+    {% capture email_title %}Your order has shipped!{% endcapture %}
+    {% capture email_body %}Thank you for ordering from BeautyHive. Your items will be arriving soon!{% endcapture %}
+  {% else %}
+    {% capture email_title %}Your order has shipped!{% endcapture %}
+    {% capture email_body %}Thank you for ordering from BeautyHive. Your items will be arriving soon!{% endcapture %}
+  {% endif %}
+{% endif %}
+
+{% capture email_emphasis %}Estimated delivery date: <strong>{{fulfillment.estimated_delivery_at | date: "%B %-d, %Y"}}</strong>{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+
+    .email_title {
+      font-family: 'Playfair Display', serif;
+      font-size:28px;
+      color:black;
+    }
+    .email_body {
+      font-family: 'Avenir', serif;
+      font-size:17px;
+      color:black;
+    }
+    .product_text {
+      font-family: 'Avenir', serif !important;
+    }
+    .button__cell {
+      background: #FFFFFF;
+      border-radius: 0px;
+      border: 2px solid #0A7E7E;
+      text-decoration:none !important;
+      color: #383d44 !important;
+
+     }
+
+     .button__cell > a {
+       text-decoration:none !important;
+       color: #383d44 !important;
+       font-family:'Avenir', arial;
+       text-transform:uppercase;
+       font-size: 15px;
+       letter-spacing:.7px;
+       text-align:center;
+      }
+
+      h3  {
+        font-family:'Avenir Next', 'Avenir', arial !important;
+      }
+      .button__text {
+        font-family:'Avenir', arial !important;
+        font-size:18px !important;
+        text-decoration: none !important;
+        color:black !important;
+      }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+
+      @media only screen and (max-device-width:480px) {
+        .email_title {
+          font-family: 'Playfair Display', serif;
+          font-size:25px;
+          color:black;
+        }
+      }
+
+  </style>
+</head>
+
+  <body>
+
+    <table class="product_text body">
+      <tr>
+        <td>
+          <table class="product_text header row">
+  <tr>
+    <td class="product_text header__cell">
+      <center>
+
+        <table class="product_text container">
+          <tr>
+            <td>
+
+              <table class="product_text row">
+                <tr>
+                  <td class="product_text shop-name__cell" style = "margin-bottom:20px;">
+                    {%- if shop.email_logo_url %}
+                      <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                    {%- else %}
+                      <h1 class="product_text shop-name__text">
+                        <a href="{{shop.url}}">{{ shop.name }}</a>
+                      </h1>
+                    {%- endif %}
+                  </td>
+
+                    <td class="product_text order-number__cell">
+                      <span class="product_text order-number__text">
+                        Order {{ order_name }}
+                      </span>
+                    </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+
+      </center>
+    </td>
+  </tr>
+</table>
+
+          <table class="product_text row content" >
+  <tr>
+    <td class="product_text content__cell">
+      <center>
+        <table class="product_text container">
+          <tr>
+            <td>
+
+              <h2 class="email_title">{{ email_title }}</h2>
+              <p class="email_body">{{ email_body }}</p>
+              <p class="email_body">{{ covid_msg }}</p>
+            {% if fulfillment.estimated_delivery_at %}
+              <p>{{ email_emphasis }}</p>
+            {% endif %}
+            {% if order_status_url %}
+              <table class="product_text row actions">
+  <tr>
+    <td class="product_text empty-line"> </td>
+  </tr>
+  <tr>
+    <td class="product_text actions__cell">
+      <table class="product_text button main-action-cell" style = "width:240px;text-align:left;margin 0 auto !important;" width="240" align="left">
+        <tr>
+          <td class="product_text button__cell" style = "width:240px;padding:10px;" width="240">
+            <a href="{{ order_status_url }}" class="product_text">
+              <span style="color:black !important;text-decoration:none;font-size:18px;">
+                <font color="black">VIEW YOUR ORDER</font>
+                </span>
+              </a>
+            </td>
+        </tr>
+      </table>
+
+
+    </td>
+  </tr>
+</table>
+
+            {% else %}
+              {% if shop.url %}
+    <table class="product_text row actions">
+      <tr>
+        <td class="product_text actions__cell">
+          <table class="product_text button main-action-cell" style = "width:250px;text-align:left;margin 0 auto !important;" width="250" align="left">
+            <tr>
+              <td class="product_text button__cell"><a href="{{ shop.url }}" class="product_text button__text">Visit our store</a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+{% endif %}
+
+            {% endif %}
+            {% if fulfillment.tracking_numbers.size > 0 %}
+  <p class="email_body disclaimer__subtext" style="font-size:17px !important;">
+    <br/>
+    {% if fulfillment.tracking_numbers.size == 1 and fulfillment.tracking_company and fulfillment.tracking_url %}
+      {{ fulfillment.tracking_company }} tracking number: <a href="{{ fulfillment.tracking_url }}">{{ fulfillment.tracking_numbers.first }}</a>
+    {% elsif fulfillment.tracking_numbers.size == 1 %}
+      Tracking number: {{ fulfillment.tracking_numbers.first }}
+    {% else %}
+      Tracking numbers:<br />
+      {% for tracking_number in fulfillment.tracking_numbers %}
+        {{ tracking_number }}<br />
+      {% endfor %}
+    {% endif %}
+  </p>
+{% endif %}
+
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+          <table class="product_text row section">
+  <tr>
+    <td class="product_text section__cell">
+      <center>
+        <table class="product_text container">
+          <tr>
+            <td>
+              <h3>Items in this shipment</h3>
+            </td>
+          </tr>
+        </table>
+        <table class="product_text container">
+          <tr>
+            <td>
+
+
+<table class="product_text row">
+  {% for line in fulfillment.fulfillment_line_items %}
+  <tr class="product_text order-list__item">
+    <td class="product_text order-list__item__cell">
+      <table>
+        <td>
+          {% if line.line_item.image %}
+            <img src="{{ line.line_item | img_url: 'compact_cropped' }}" align="left" width="60" height="60" class="product_text order-list__product-image"/>
+          {% endif %}
+        </td>
+        <td class="product_text order-list__product-description-cell">
+          {% if line.quantity < line.line_item.quantity %}
+            {% capture line_display %} {{ line.quantity }} of {{ line.line_item.quantity }} {% endcapture %}
+          {% else %}
+            {% assign line_display = line.line_item.quantity  %}
+          {% endif %}
+
+          <span class="product_text order-list__item-title">{{ line.line_item.title }} × {{ line_display }}</span><br/>
+
+          {% if line.line_item.variant_title != 'Default Title' %}
+            <span class="product_text order-list__item-variant">{{ line.line_item.variant_title }}</span><br/>
+          {% endif %}
+
+            {% if line.line_item.refunded_quantity > 0 %}
+              <span class="product_text order-list__item-refunded">Refunded</span>
+            {% endif %}
+
+          {% if line.line_item.discount_allocations %}
+            {% for discount_allocation in line.line_item.discount_allocations %}
+              {% if discount_allocation.discount_application.target_selection != 'all' %}
+                <span class="product_text order-list__item-discount-allocation">
+                  <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}" width="18" height="18" class="product_text discount-tag-icon" />
+                  <span>
+                    {{ discount_allocation.discount_application.title | upcase }}
+                    (-{{ discount_allocation.amount | money }})
+                  </span>
+                </span>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </td>
+      </table>
+    </td>
+  </tr>{% endfor %}
+</table>
+
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+<!-- TEMP BANNER -->
+<table class="product_text row footer">
+  <tr>
+    <td class="product_text footer__cell">
+      <center>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" class="MobileAutoWidth" style="width:600px;" width="600">
+          <tbody>
+            <tr>
+              <td>
+                <a href="https://events.bizzabo.com/solasessions" style="word-wrap:break-word;max-width:100%;color:#739EE9;font-weight:normal;text-decoration:underline;display:block;" target="_self">
+                  <img align="center" alt="On Sale Now - The Sola Sessions reconnected -- a virtual experience. Monday, May 17th. Get Your Ticket >>" class="Image"
+                    src="https://cdn.shopify.com/s/files/1/0273/5541/4580/files/sola-sessions-order-conf.png?v=1618261995"
+                    style="border:0;height:auto;line-height:100%;outline:none;text-decoration:none;padding-bottom:0;display:block;font-size:12px;width:600px;padding:0;border-width:0;margin:0;vertical-align:bottom;" width="600" />
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+<!-- END TEMP BANNER -->
+
+          <table class="product_text row footer">
+  <tr>
+    <td class="product_text footer__cell">
+      <center>
+        <table class="product_text container">
+          <tr>
+            <td style = "text-align:left;">
+
+              <p class="email_title">Questions? We're here to help.</p><br>
+              <table class="product_text product_text button main-action-cell" style = "width:200px;margin 0 auto !important;" width="200">
+                <tr>
+                  <td class="product_text product_text button__cell" style = "width:200px;padding:10px 10px;" width="200" >
+                    <a style="text-decoration:none !important;color:black !important;text-transform:uppercase !important;" href="https://www.beautyhive.com/pages/contact-us" class="product_text">
+                      <span style="color:black !important;text-decoration:none;font-size:18px;">
+                        <font color="black">CONTACT US</font></span></a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+<img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="product_text spacer" height="1" />
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
